@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Linux一键安装Aria2 + AriaNg + Filebrowser实现离线下载 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
+<link rel="shortcut icon" href="https://zhuzi.github.io/favicon.ico?v=1663506553730">
+<link rel="stylesheet" href="https://zhuzi.github.io/styles/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="主要功能
+支持HTTP/HTTPS/FTP/BT/磁力链接等离线下载，断点续传等
+文件管理、视频在线播放
+完善的帮助文档
+本次更新内容
+优化安装脚本
+更新aria2版本
+更新Filebrowser版本
+更新AriaNG版本
+移除Caddy，..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://zhuzi.github.io">
+        <img src="https://zhuzi.github.io/images/avatar.png?v=1663506553730" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zhuzi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Linux一键安装Aria2 + AriaNg + Filebrowser实现离线下载</h2>
+            <div class="post-date">2022-09-18</div>
+            
+            <div class="post-content" v-pre>
+              <p>主要功能</p>
+<p>支持HTTP/HTTPS/FTP/BT/磁力链接等离线下载，断点续传等</p>
+<p>文件管理、视频在线播放</p>
+<p>完善的帮助文档</p>
+<p>本次更新内容</p>
+<p>优化安装脚本</p>
+<p>更新aria2版本</p>
+<p>更新Filebrowser版本</p>
+<p>更新AriaNG版本</p>
+<p>移除Caddy，改用Golang写了一个简单的WebServer来运行AriaNG</p>
+<p>CentOS 8支持</p>
+<p>修复一些BUG</p>
+<p>一键安装CCAA（Aria2 + AriaNg + Filebrowser）</p>
+<p>目前支持的操作系统为：CentOS 7-8、Debian 8-10、Ubuntu 16-18，操作系统要求64位。请根据自己的VPS位置复制下面的命令：</p>
+<p>#海外<br>
+bash &lt;(curl -Lsk https://raw.githubusercontent.com/helloxz/ccaa/master/ccaa.sh)<br>
+#国内<br>
+bash &lt;(curl -Lsk https://raw.githubusercontent.com/helloxz/ccaa/master/ccaa.sh) cdn</p>
+<p>复制</p>
+<p>如果出现-bash: curl: command not found错误，说明curl命令没安装，请输入下面的命令先安装curl，再回过头来执行上面的命令。</p>
+<p>#Debian or Ubuntu<br>
+apt-get -y install curl<br>
+#CentOS<br>
+yum -y install curl</p>
+<p>复制</p>
+<p>如果不出现错误，会看到下面的界面，根据提示输入1安装CCAA</p>
+<p>安装过程中会要求设置下载路径（若不填写默认下载路径为/data/ccaaDown）和Aria2 RPC 密钥，密钥建议字母 + 数字组合，不要含有特殊字符，以免出现异常。</p>
+<p>安装完毕后会提示访问地址、Aria2 RPC 密钥、File Browser 用户名、密码</p>
+<p>访问地址默认为http://IP:6080</p>
+<p>Aria2 RPC 密钥:您自行设置的</p>
+<p>File Browser 用户名：默认为ccaa</p>
+<p>File Browser 密码：默认为admin</p>
+<p>使用入门</p>
+<p>输入http://IP:6080访问AriaNg ，首次打开会提示&quot;认证失败&quot;，这个是正常现象。依次点击&quot;AriaNg设置 - RPC - 填写您之前设置的RPC密钥&quot;</p>
+<p>左侧导航栏有一个&quot;文件管理&quot;菜单，是FileBrowser的入口地址，URL地址为http://IP:6081，初始用户名为：ccaa，密码为：admin，登录FileBrowser后请务必修改密码。</p>
+<p>常用命令</p>
+<p>安装成功后，您可以使用如下命令来管理CCAA：</p>
+<p>#进入CCAA管理界面<br>
+ccaa<br>
+#查看ccaa状态<br>
+ccaa status<br>
+#启动ccaa<br>
+ccaa start<br>
+#停止ccaa<br>
+ccaa stop<br>
+#重启ccaa<br>
+ccaa restart<br>
+#查看当前版本<br>
+ccaa -v</p>
+<p>复制</p>
+<p>注意事项</p>
+<p>CCAA是从Github拉取资源，建议国外服务器使用，国内服务器可能安装速度非常缓慢或不成功</p>
+<p>如果服务器有启用安全组，请务必在安全组放行以下端口：6080/6081/6800/6998/51413</p>
+<p>大部分服务商是禁止下载BT的，若因违规使用导致服务器被封本人不承担任何责任</p>
+<p>其它</p>
+<p>更多使用说明请参考帮助文档，在提出疑问之前建议先阅读一遍帮助文档，如果有什么建议或者问题欢迎留言反馈。</p>
+<p>CCAA项目地址：https://github.com/helloxz/ccaa</p>
+<p>帮助文档：https://www.yuque.com/helloz/ccaa</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://zhuzi.github.io/post/hello-gridea/">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
